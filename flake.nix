@@ -15,6 +15,18 @@
           hash = "sha256:9233ed1b87d3e6b45722278f3c286dcd41e83da778bd0f80a1dd04949696ad93";
         };
       in
-      appimageTools.wrapType2 { inherit pname version src; };
+      appimageTools.wrapType2 {
+        inherit pname version src;
+
+        nativeBuildInputs = [ copyDesktopItems ];
+
+        desktopItems = [
+          (makeDesktopItem {
+            name = "musescore";
+            desktopName = "MuseScore";
+            exec = "musescore";
+          })
+        ];
+      };
   };
 }
