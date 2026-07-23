@@ -14,19 +14,18 @@
           url = "https://github.com/musescore/MuseScore/releases/download/v4.7.4/MuseScore-Studio-4.7.4.260706075-x86_64.AppImage";
           hash = "sha256:9233ed1b87d3e6b45722278f3c286dcd41e83da778bd0f80a1dd04949696ad93";
         };
+
+        appimageContents = appimageTools.extract { inherit pname version src; };
+
       in
       appimageTools.wrapType2 {
         inherit pname version src;
 
-        nativeBuildInputs = [ copyDesktopItems ];
-
-        desktopItems = [
-          (makeDesktopItem {
-            name = "musescore";
-            desktopName = "MuseScore";
-            exec = "musescore";
-          })
-        ];
+        extraInstallCommands = ''
+          install -m 444 -D ${appimageContents}/org.musescore.MuseScore4portable.desktop $out/share/applications/org.musescore.MuseScore4portable.desktop
+          substituteInPlace $out/share/applications/org.musescore.MuseScore4portable.desktop \
+                --replace-fail 'Exec=mscore4portable' 'Exec=musescore'
+        '';
       };
   };
 }
