@@ -8,11 +8,11 @@
       with import nixpkgs { system = "x86_64-linux"; };
       let
         pname = "musescore";
-        version = "4.7.4";
+        version = "4.7.6";
 
         src = fetchurl {
-          url = "https://github.com/musescore/MuseScore/releases/download/v4.7.4/MuseScore-Studio-4.7.4.260706075-x86_64.AppImage";
-          hash = "sha256:9233ed1b87d3e6b45722278f3c286dcd41e83da778bd0f80a1dd04949696ad93";
+          url = "https://github.com/musescore/MuseScore/releases/download/v4.7.6/MuseScore-Studio-4.7.6.261022093-x86_64.AppImage";
+          hash = "sha256:5fcbd1f292270eca5c3867d56b767c31a173a155216a415f5caee22553f8e7a6";
         };
 
         appimageContents = appimageTools.extract { inherit pname version src; };
